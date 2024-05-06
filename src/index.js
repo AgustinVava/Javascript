@@ -9,7 +9,18 @@ document.addEventListener("DOMContentLoaded", function () {
     const personas = obtenerDatos(numPersons);
     const resultados = procesarDatos(personas);
     mostrarResultado(resultados);
+
+    // Almacenar en LocalStorage
+    localStorage.setItem("personas", JSON.stringify(personas));
   });
+
+  // Obtener datos de LocalStorage al cargar la página
+  const personasGuardadas = localStorage.getItem("personas");
+  if (personasGuardadas) {
+    const personas = JSON.parse(personasGuardadas);
+    const resultados = procesarDatos(personas);
+    mostrarResultado(resultados);
+  }
 });
 
 function obtenerDatos(numPersonas) {
