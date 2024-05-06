@@ -3,20 +3,32 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Procesador de Edades</title>
+        <title>Formulario de Personas</title>
+        <script src="./src/data.js"></script>
         <script src="./src/index.js"></script>
-        <link rel="stylesheet" href="./Css/style.css">
+        <link
+            href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+            rel="stylesheet">
 
     </head>
-    <body>
-        <div class="container">
-            <h1>Procesador de Edades</h1>
-            <form id="person-form">
-                <label for="num-persons">Número de personas:</label>
-                <input type="number" id="num-persons">
-                <button type="submit">Ingresar datos</button>
+    <body class="bg-gray-100">
+
+        <div class="container mx-auto p-4">
+
+            <h1 class="text-3xl font-bold mb-4">Formulario de Personas</h1>
+
+            <form id="person-form" class="mb-8">
+                <label for="num-persons" class="block mb-2">Número de
+                    personas:</label>
+                <input type="number" id="num-persons" name="num-persons" min="1"
+                    required
+                    class="block w-full px-4 py-2 mb-4 rounded-md border-gray-300 focus:outline-none focus:border-blue-500">
+                <button type="submit"
+                    class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Enviar</button>
             </form>
+
             <div id="results"></div>
+
         </div>
 
     </body>

@@ -33,3 +33,13 @@ function procesarDatos(personas) {
   });
   return resultados;
 }
+
+function mostrarResultado(resultados) {
+  const resultsDiv = document.getElementById("results");
+  resultsDiv.innerHTML = ""; // Se limpia el div de resultados antes de mostrar los nuevos resultados
+  resultados.forEach((resultado) => {
+    const paragraph = document.createElement("p");
+    paragraph.textContent = resultado;
+    resultsDiv.appendChild(paragraph);
+  });
+}
