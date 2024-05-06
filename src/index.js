@@ -31,4 +31,5 @@ function mostrarResultado(resultados) {
 // Llamada a las funciones
 const personas = obtenerDatos();
 const resultados = procesarDatos(personas);
-mostrarResultado(resultados);
+mostrarResultado(resultados);   
+
