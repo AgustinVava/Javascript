@@ -1,36 +1,53 @@
 document.addEventListener("DOMContentLoaded", function () {
   const form = document.getElementById("person-form");
-  const resultsDiv = document.getElementById("results");
 
   form.addEventListener("submit", function (event) {
     event.preventDefault();
-    const numPersonsInput = document.getElementById("num-persons");
-    const numPersons = parseInt(numPersonsInput.value);
-    const personas = obtenerDatos(numPersons);
-    const resultados = procesarDatos(personas);
-    mostrarResultado(resultados);
 
-    // Almacenar en LocalStorage
-    localStorage.setItem("personas", JSON.stringify(personas));
+    const nombre = document.getElementById("nombre").value;
+    const edad = parseInt(document.getElementById("edad").value);
+
+    if (edad >= 18) {
+      alert(
+        `Hola ${nombre}, eres mayor de edad. ¡Bienvenido/a a la tienda de motociclismo!`
+      );
+      window.location.href = "./store.html";
+    } else {
+      alert(
+        `Hola ${nombre}, eres menor de edad. No puedes acceder a la tienda de motociclismo.`
+      );
+    }
   });
-
-  // Obtener datos de LocalStorage al cargar la página
-  const personasGuardadas = localStorage.getItem("personas");
-  if (personasGuardadas) {
-    const personas = JSON.parse(personasGuardadas);
-    const resultados = procesarDatos(personas);
-    mostrarResultado(resultados);
-  }
 });
 
-function obtenerDatos(numPersonas) {
-  const personas = [];
-  for (let i = 0; i < numPersonas; i++) {
-    const nombre = prompt(`Ingrese el nombre de la persona ${i + 1}:`);
-    const edad = parseInt(prompt(`Ingrese la edad de la persona ${i + 1}:`));
-    personas.push({ nombre, edad });
+// Se almacena en LocalStorage
+localStorage.setItem("personas", JSON.stringify(personas));
+
+// Verifica si todos son mayores de edad
+const todosMayores = personas.every((persona) => persona.edad >= 18);
+if (todosMayores) {
+  window.location.href = "./store.html";
+}
+
+// Obtiene datos de LocalStorage al cargar la página
+const personasGuardadas = localStorage.getItem("personas");
+if (personasGuardadas) {
+  const personas = JSON.parse(personasGuardadas);
+  const resultados = procesarDatos(personas);
+  mostrarResultado(resultados);
+}
+
+async function obtenerDatos(numPersonas) {
+  let personas = await obtenerDatosDesdeJSON();
+  if (!personas || personas.length === 0) {
+    personas = [];
+    for (let i = 0; i < numPersonas; i++) {
+      const nombre = `Persona ${i + 1}`;
+      const edad = _.random(10, 60); 
+      personas.push({ nombre, edad });
+    }
   }
-  return personas;
+  return personas.slice(0, numPersonas);
 }
 
 function procesarDatos(personas) {
