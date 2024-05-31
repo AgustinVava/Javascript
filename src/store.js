@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
   const storeItemsDiv = document.getElementById("store-items");
+  const cartAccessBtn = document.getElementById("cart-access-btn");
 
   const items = [
     { id: 1, nombre: "Casco", precio: 238000, imagen: "./assets/casco.png" },
@@ -32,7 +33,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const img = document.createElement("img");
     img.src = item.imagen;
     img.alt = item.nombre;
-    img.classList.add("w-full", "h-auto", "mb-4");
+    img.classList.add("w-15", "h-auto", "object-cover", "mb-4"); 
 
     const nombre = document.createElement("h2");
     nombre.textContent = item.nombre;
@@ -60,6 +61,7 @@ document.addEventListener("DOMContentLoaded", function () {
     );
     agregarCarritoBtn.addEventListener("click", function () {
       agregarAlCarrito(item);
+      cartAccessBtn.style.display = "block"; 
     });
 
     itemDiv.appendChild(img);
@@ -76,17 +78,7 @@ document.addEventListener("DOMContentLoaded", function () {
     localStorage.setItem("carrito", JSON.stringify(carrito));
   }
 
-  const cartAccessBtn = document.getElementById("cart-access-btn");
-
-  // Mostrar u ocultar botón de acceso al carrito según el estado del carrito
-  const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
-  if (carrito.length > 0) {
-    cartAccessBtn.style.display = "block";
-  } else {
-    cartAccessBtn.style.display = "none";
-  }
-
-  // Redireccionar al carrito al hacer clic en el botón de acceso al carrito
+  
   cartAccessBtn.addEventListener("click", function () {
     window.location.href = "./cart.html";
   });
